@@ -1,0 +1,191 @@
+<div class="card w-75 mx-auto" th:fragment="athlete-info">
+    <div class="card-header">
+        Sporcu bilgileri
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+
+            <form>
+
+                <div class="row">
+
+                    <div class="col-sm-6">
+
+                        <div class="form-group row">
+                            <label for="tc-no" class="col-sm-4 col-form-label-sm">TC kimlik no</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="tc-no" placeholder="TC kimlik no">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-4 col-form-label-sm">Ad</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="name" placeholder="Ad">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="surname" class="col-sm-4 col-form-label-sm">Soyad</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="surname" placeholder="Soyad">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="birth-date" class="col-4 col-form-label-sm">Doğum tarihi</label>
+                            <div class="col-sm-8">
+                                <input class="form-control form-control-sm" type="date" id="birth-date" value="2009-08-19">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="gender" class="col-4 col-form-label-sm">Cinsiyeti</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" id="gender">
+                                    <option>Erkek</option>
+                                    <option>Kadın</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="blodeType" class="col-4 col-form-label-sm">Kan grubu</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" id="blodeType">
+                                    <option>A Rh+</option>
+                                    <option>A Rh-</option>
+                                    <option>B Rh+</option>
+                                    <option>B Rh-</option>
+                                    <option>AB Rh+</option>
+                                    <option>AB Rh-</option>
+                                    <option>0 Rh+</option>
+                                    <option>0 Rh-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-4 col-form-label-sm">Geldiği şehir</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="city" placeholder="Geldiği şehir">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="school" class="col-sm-4 col-form-label-sm">Okulu</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="school" placeholder="Okulu">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="school" class="col-sm-4 col-form-label-sm">Kulübü</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="school" placeholder="Kulübü">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="agency" class="col-sm-4 col-form-label-sm">Acenta</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="agency" placeholder="Acenta">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-6">
+
+
+
+                        <div class="form-group row">
+                            <label for="size" class="col-4 col-form-label-sm">Forma bedeni</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" id="size">
+                                    <option>XS</option>
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+                                    <option>XXL</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="jerseyNumber" class="col-sm-4 col-form-label-sm">Forma numarası</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="jerseyNumber" placeholder="Forma numarası">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mother-name" class="col-sm-4 col-form-label-sm">Anne adı</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="mother-name" placeholder="Anne adı">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="father-name" class="col-sm-4 col-form-label-sm">Baba adı</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="father-name" placeholder="Baba adı">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone-number" class="col-sm-4 col-form-label-sm">Telefon numarası</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="phone-number" placeholder="Telefon numarası">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label-sm">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control form-control-sm" id="inputEmail3" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mother-phone-number" class="col-sm-4 col-form-label-sm">Anne telefon</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="mother-phone-number" placeholder="Annenin telefon numarası">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="father-phone-number" class="col-sm-4 col-form-label-sm">Baba telefon</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-sm" id="father-phone-number" placeholder="Babanın telefon numarası">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-8">
+                                <button type="button" class="btn btn-link">Velisi annesi</button>
+                                <button type="button" class="btn btn-link">Velisi babası</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+        </blockquote>
+    </div>
+</div>
+

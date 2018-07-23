@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <nav th:fragment="top-menu" class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse justify-content-between">
+            <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="https://v4-alpha.getbootstrap.com/examples/dashboard/#">Beyaz Gölge </a>
+
+
+            <li class="nav-item dropdown">
+                <span class="navbar-text dropdown-toggle" th:text="${user_name}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Kullanıcı adı
+                </span>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <!--<a class="dropdown-item" href="/logout">Çıkış</a>!-->
+                    <form th:action="@{/logout}" method="post">
+                        <input class="dropdown-item" type="submit" value="Sign Out"/>
+                    </form>
+                </div>
+               
+            </li>
+
+        </nav>
+
+
+        <nav th:fragment="left-menu" class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+
+            <ul class="nav nav-pills flex-column">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${camp_page} ? active  : x " href="./index"> Kamplar </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${registration_page} ? active : x" href="./registration">Kayıt</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${pre_registration_page} ? active : x" href="./pre-registration-list">Ön Kayıt Listesi</a>
+                </li>
+
+
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')" >
+                    <a class="nav-link" th:classappend="${report_page} ? active : x" href="./reports">Ödeme Raporları</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')" >
+                    <a class="nav-link" th:classappend="${user_page} ? active : x " href="./users">Kullanıcılar</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+    </body>
+</html>

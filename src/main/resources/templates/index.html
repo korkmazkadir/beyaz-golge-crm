@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
+<html lang="en" class="gr__v4-alpha_getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+
+        <title>Dashboard Template for Bootstrap</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+
+        <!-- Bootstrap core CSS -->
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="./css/dashboard.css" rel="stylesheet">
+
+    <body data-gr-c-s-loaded="true">
+        <div th:insert="fragments::top-menu"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div th:insert="fragments::left-menu"></div>
+
+                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+
+                    <!--
+                    Logged user: <span sec:authentication="name">Bob</span>
+                    Roles: <span sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]</span>
+                    !-->
+
+                    <div class="help-block" style="height:20px;"></div>
+
+                    <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                            Kamplar
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Kamp adı</th>
+                                                <th>Başlangıç tarihi</th>
+                                                <th>Kayıt sayısı</th>
+                                                <th sec:authorize="hasAuthority('ADMIN')">Düzenle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <th:block th:each="camp : ${camps}">
+                                            <tr>
+                                                <td><button 
+                                                        th:text="${camp.name}" 
+                                                        type="button" 
+                                                        class="btn btn-link"  
+                                                        th:onclick="'redirect(\' ./camp-details?id='+ ${camp.id} +'\');'" 
+                                                        >NBA Kartepe 4.Devre</button></td>
+                                                <td th:text="${#dates.format(camp.startDate, 'dd/MM/yyyy')}">00000</td>
+                                                <td>23</td>
+                                                <td sec:authorize="hasAuthority('ADMIN')"><button 
+                                                        type="button" 
+                                                        class="btn btn-link"
+                                                        th:onclick="'fillEditForm('+ ${camp.id} +');'">düzenle</button></td>
+                                            </tr>
+                                        </th:block>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>!-->
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="help-block" style="height:10px;"></div>
+
+                    <!-- Button trigger modal -->
+                    <div class="card w-75 mx-auto" sec:authorize="hasAuthority('ADMIN')">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" >Yeni kamp kaydı</button>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" sec:authorize="hasAuthority('ADMIN')">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Yeni kamp</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form th:action="@{/index}" method="post" id="camp-form" >
+
+                                        <div class="form-group row">
+                                            <label for="camp-name" class="col-sm-2 col-form-label-sm">Kamp adı</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="camp-name" placeholder="Kamp adı" name="name" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="camp-name" class="col-sm-2 col-form-label-sm">Yer adı</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="camp-name" placeholder="Yer adı" name="place" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="start-date" class="col-sm-2 col-form-label-sm">Başlangıç tarihi</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control form-control-sm" type="date" id="start-date" value="2009-08-19" name="startDate" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="end-date" class="col-sm-2 col-form-label-sm">Bitiş tarihi</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control form-control-sm" type="date" id="end-date" value="2009-08-19" name="endDate" required="">
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                                    <button type="button" class="btn btn-primary" id="save-camp">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" sec:authorize="hasAuthority('ADMIN')">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kamp bilgisi düzenleme</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form th:action="@{/index}" method="post" id="update-camp-form" >
+
+                                        <input type="hidden" id="update-id" name="id">
+
+                                        <div class="form-group row">
+                                            <label for="camp-name" class="col-sm-2 col-form-label-sm">Kamp adı</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="update-name" placeholder="Kamp adı" name="name" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="camp-name" class="col-sm-2 col-form-label-sm">Yer adı</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="update-place" placeholder="Yer adı" name="place" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="start-date" class="col-sm-2 col-form-label-sm">Başlangıç tarihi</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control form-control-sm" type="date" id="update-start-date" value="2009-08-19" name="startDate" required="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="end-date" class="col-sm-2 col-form-label-sm">Bitiş tarihi</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control form-control-sm" type="date" id="update-end-date" value="2009-08-19" name="endDate" required="">
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                                    <button type="button" class="btn btn-warning" id="update-camp">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </main>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="./js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="./js/ie10-viewport-bug-workaround.js"></script>
+
+        <script type="text/javascript">
+            function redirect(pageURL) {
+                window.open(pageURL, '_blank');
+            }
+        </script>
+        
+
+        <script type="text/javascript" sec:authorize="hasAuthority('ADMIN')">
+        $("#save-camp").click(function () {
+            $("#camp-form").submit();
+        });
+        
+        $("#update-camp").click(function () {
+            $("#update-camp-form").submit();
+        });
+        
+        
+        function fillEditForm(id) {
+            console.log("Camp id is " + id);
+            const serviceUrl = "/camp?id=" + id;
+
+            $.ajax({
+                    url: serviceUrl
+    }).then(function (data) {
+                            if (data) {
+                        var camp = data[0];
+                        console.log(camp);
+                        $("#update-id").val(camp.id);
+                        $("#update-name").val(camp.name);
+                        $("#update-place").val(camp.place);
+                        $("#update-start-date").val(camp.startDate);
+                        $("#update-end-date").val(camp.endDate);
+
+                        $('#updateModal').modal('show');
+            }
+            });
+            }
+           
+            </script>
+
+
+    </body></html>

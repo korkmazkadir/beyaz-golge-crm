@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
+<html lang="en" class="gr__v4-alpha_getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+
+        <title>Dashboard Template for Bootstrap</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+
+        <!-- Bootstrap core CSS -->
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="./css/dashboard.css" rel="stylesheet">
+    </head>
+
+    <body data-gr-c-s-loaded="true">
+        <div th:insert="fragments::top-menu"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:insert="fragments::left-menu"></div>
+
+                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+
+
+                    <div class="help-block" style="height:20px;"></div>
+
+                    <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                            Kullanıcılar
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Kullanıcı adı</th>
+                                                <th>Tip</th>
+                                                <th>Şifre</th>
+                                                <th>Düzenle</th>
+                                                <th>Hareket dökümü</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr th:each="user : ${users}">
+                                                <td th:text="${user.username}">kadir</td>
+                                                <td th:text="${user.role}">normal</td>
+                                                <td th:text="${user.password}">3.14</td>
+                                                <td><button type="button" class="btn btn-link" th:onclick="'fillEditForm('+ ${user.id} +');'">düzenle</button></td>
+                                                <td><button type="button" class="btn btn-link" th:onclick="'showUserActivity('+ ${user.id} +');'">listele</button></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>!-->
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="help-block" style="height:10px;"></div>
+
+                    <!-- Button trigger modal -->
+                    <div class="card w-75 mx-auto">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" >Yeni kullanıcı kaydı</button>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Yeni kullanıcı</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form th:action="@{/users}" method="post" id="user-form">
+
+                                        <div class="form-group row">
+                                            <label for="camp-name" class="col-sm-2 col-form-label-sm">Kullanıcı adı</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="username" name="username" placeholder="Kullanıcı adı">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="birth-date" class="col-2 col-form-label-sm">Kullanıcı tipi</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control form-control-sm" id="role" name="role">
+                                                    <option value="0">Normal</option>
+                                                    <option value="1">Süper</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="password" class="col-sm-2 col-form-label-sm">Şifre</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="password" name="password" placeholder="Şifre">
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                                    <button type="button" class="btn btn-primary" id="save-user">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="userActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kullanıcı hareket dökümü</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Kullanıcı Adı : kadir </h6>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tarih</th>
+                                                    <th>Saat</th>
+                                                    <th>Hareket</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>03/06/2018</td>
+                                                    <td>16:13</td>
+                                                    <td>sisteme giriş</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>03/06/2018</td>
+                                                    <td>16:13</td>
+                                                    <td>sporcu ön kaydı</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>03/06/2018</td>
+                                                    <td>16:13</td>
+                                                    <td>sporcu kasin kaydı</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>03/06/2018</td>
+                                                    <td>16:13</td>
+                                                    <td>ön kayıt güncelleme</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>03/06/2018</td>
+                                                    <td>16:13</td>
+                                                    <td>kesin kayıt güncelleme</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>03/06/2018</td>
+                                                    <td>16:13</td>
+                                                    <td>veli görüşmesi ekleme</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </main>          
+
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+        <script type="text/javascript">window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="./js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="./js/ie10-viewport-bug-workaround.js"></script>
+
+        <script type="text/javascript">
+        
+        $("#save-user").click(function () {
+            $("#user-form").submit();
+        });
+        
+        $("#update-user").click(function () {
+            $("#update-user-form").submit();
+        });    
+        
+        </script>
+
+
+    </body></html>
