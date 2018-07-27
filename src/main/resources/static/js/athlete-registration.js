@@ -54,6 +54,7 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
     //
     $scope.recordButtonText = "Yeni sporcu kaydet";
     $scope.recordButtonsEnabled = true;
+    $scope.tcNumberValid = true;
 
     $scope.tcNumberElementClass = "danger";
 
@@ -88,6 +89,7 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
             }
 
             $scope.tcNumberElementClass = "success";
+            $scope.tcNumberValid = false;
             console.log("---> TC number : " + $scope.idNumber);
             loadAthleteFromDB($scope.id);
 
@@ -95,10 +97,11 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
 
             if (isDataLoadedFromDB) {
                 clearForm();
-                isDataLoadedFromDB = false;
+                isDataLoadedFromDB = true;
             }
 
             $scope.tcNumberElementClass = "danger";
+            $scope.tcNumberValid = false;
             console.log("invalid TC number : " + $scope.idNumber);
             return;
         }
@@ -117,9 +120,14 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
             data: getPostData(),
             headers: {'Content-Type': 'application/json'}
         }).then(function successCallback(data, status, headers, config) {
+
+            showToastMessage(ToastMessageType.SUCCESS, "Sporcu verisi kaydedildi.");
+
             loadAthleteFromDB($scope.idNumber);
             console.log("save athlete is successful : " + JSON.stringify(status));
         }, function errorCallback(data, status, headers, config) {
+
+            showToastMessage(ToastMessageType.ERROR, "Bir sorun oluştu, sporcu verisi kaydedilemedi.");
 
             console.log("save athlete is unsuccessful : " + JSON.stringify(status));
             console.log("Error data : " + JSON.stringify(data));
@@ -134,9 +142,14 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
             data: getPostDataPreRegistration(),
             headers: {'Content-Type': 'application/json'}
         }).then(function successCallback(data, status, headers, config) {
+
+            showToastMessage(ToastMessageType.SUCCESS, "Ön kayıt işlemi başarılı.");
+
             loadAthleteFromDB($scope.idNumber);
             console.log("save registration is successful : " + JSON.stringify(status));
         }, function errorCallback(data, status, headers, config) {
+
+            showToastMessage(ToastMessageType.ERROR, "Bir sorun oluştu, ön kayıt işlemi yapılamadı.");
 
             console.log("save registration is unsuccessful : " + JSON.stringify(status));
             console.log("Error data : " + JSON.stringify(data));
@@ -198,6 +211,8 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
             console.log("get athlete is successful : " + JSON.stringify(status));
             console.log("Error data : " + JSON.stringify(data));
         }, function errorCallback(data, status, headers, config) {
+
+            showToastMessage(ToastMessageType.ERROR, "Bir sorun oluştu, sporcu verisi veri tabanından getirilemedi.")
 
             console.log("get athlete is unsuccessful : " + JSON.stringify(status));
             console.log("Error data : " + JSON.stringify(data));
@@ -303,6 +318,36 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
         $scope.emergencyEmail = "";
 
         $scope.recordButtonText = "Yeni sporcu kaydet";
+    }
+
+
+    const ToastMessageType = {
+        INFO: "info",
+        SUCCESS: "success",
+        WARNING: "warning",
+        ERROR: "error"
+    };
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+    function showToastMessage(messageType, message) {
+        toastr[messageType](message);
     }
 
 

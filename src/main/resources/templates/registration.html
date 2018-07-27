@@ -15,6 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/dashboard.css" rel="stylesheet">
+
+    <!-- Toastr styles -->
+    <link href="./css/toastr.min.css" rel="stylesheet">
     
     <style>
 
@@ -176,7 +179,7 @@
               <div class="row">
                 <div class="col-sm-4 justify-content-end"><button type="button" class="btn btn-link" onclick="showPreRegistrationForm();" ng-disabled="recordButtonsEnabled">Ön kayıt</button></div>
                 <div class="col-sm-4"><button type="button" class="btn btn-link" onclick="showRegistrationForm();" ng-disabled="recordButtonsEnabled">Kesin kayıt</button></div>
-                <div class="col-sm-4"><button type="button" class="btn btn-primary" ng-click="saveAthlete();" >{{recordButtonText}}</button></div>
+                <div class="col-sm-4"><button type="button" class="btn btn-primary" ng-click="saveAthlete();" ng-disabled="tcNumberValid" >{{recordButtonText}}</button></div>
               </div>
 
             </div>
@@ -197,7 +200,7 @@
                 <div class="form-group row">
                   <label for="pre-registration-date" class="col-4 col-form-label-sm">Ön kayıt tarihi</label>
                   <div class="col-sm-8">
-                      <input class="form-control form-control-sm"  type="date" id="pre-registration-date" ng-model="preRegistrationDate" >
+                      <input class="form-control form-control-sm"  type="date" id="pre-registration-date" ng-model="preRegistrationDate" disabled>
                   </div>
                 </div>
 
@@ -262,7 +265,7 @@
                           <div class="form-group row">
                             <label for="registration-date" class="col-4 col-form-label-sm">Kayıt tarihi</label>
                             <div class="col-sm-8">
-                              <input class="form-control form-control-sm"  type="date" id="registration-date" value="2009-08-19">
+                              <input class="form-control form-control-sm"  type="date" id="registration-date" disabled>
                             </div>
                           </div>
 
@@ -372,7 +375,11 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="./js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.min.js"></script>
@@ -382,9 +389,18 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
 
+    <script type="text/javascript" src="./js/toastr.min.js"></script>
+    
     <script type="text/javascript" src="./js/athlete-registration.js"></script>
     
+
+    
     <script type="text/javascript">
+
+    //Set date pickers automatically for these two date
+    document.getElementById('pre-registration-date').valueAsDate = new Date();
+    document.getElementById('registration-date').valueAsDate = new Date();
+
 
     function showPreRegistrationForm(){
         $("#pre-registration-from").show();
@@ -395,6 +411,7 @@
         $("#registration-from").show();
         $("#pre-registration-from").hide();
     }
+    
 
     </script>
 

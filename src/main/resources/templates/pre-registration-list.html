@@ -77,7 +77,7 @@
                                                         th:text="${reg.athlete.name + ' ' + reg.athlete.surname}"
                                                         th:onclick="'redirect(\' ./registration?id='+ ${reg.athlete.idNumber} +'\');'">Ahmet Buca</button></td>
                                                 <td class="table-text-size" th:text="${reg.camp.name}" >NBA 1.Devre</td>
-                                                <td class="table-text-size" th:text="${reg.preRegistrationDate}" >23/06/2018</td>
+                                                <td class="table-text-size" th:text="${#dates.format(reg.preRegistrationDate, 'dd/MM/yyyy')}" >23/06/2018</td>
                                                 <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#interviewAddModal">ekle</button></td>
                                                 <td><button type="button" class="btn btn-link" onclick="">kesin kayıt</button></td>
                                                 <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#exampleModal">detay</button></td>

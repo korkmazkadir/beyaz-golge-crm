@@ -214,6 +214,11 @@
         <script src="./js/ie10-viewport-bug-workaround.js"></script>
 
         <script type="text/javascript">
+            
+            //Set date pickers automatically for these two date
+            document.getElementById('update-start-date').valueAsDate = new Date();
+            document.getElementById('update-end-date').valueAsDate = new Date();
+            
             function redirect(pageURL) {
                 window.open(pageURL, '_blank');
             }
