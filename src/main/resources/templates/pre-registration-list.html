@@ -1,171 +1,163 @@
 <!DOCTYPE html>
 <!-- saved from url=(0054)https://v4-alpha.getbootstrap.com/examples/dashboard/# -->
 <html lang="en" class="gr__v4-alpha_getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <title>Dashboard Template for Bootstrap</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
-    <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
-  
-<style type="text/css">
+        <!-- Bootstrap core CSS -->
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
 
-.table-text-size{
-  font-size: 15px;
-}
+        <!-- Custom styles for this template -->
+        <link href="./css/dashboard.css" rel="stylesheet">
 
-</style>
+        <style type="text/css">
 
-</head>
+            .table-text-size{
+                font-size: 15px;
+            }
 
-  <body data-gr-c-s-loaded="true">
+        </style>
 
-      <div th:insert="fragments::top-menu"></div>
+    </head>
 
-    <div class="container-fluid">
-      <div class="row">
+    <body data-gr-c-s-loaded="true">
 
-          <div th:insert="fragments::left-menu"></div>
+        <div th:insert="fragments::top-menu"></div>
 
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" style="overflow:auto;">
-        
-          <div class="help-block" style="height:20px;"></div>
+        <div class="container-fluid">
+            <div class="row">
 
-          <div class="card w-75 mx-auto">
-            <div class="card-body">
-              <input type="text" class="form-control form-control-lg" id="search" placeholder="Aramak için kelime giriniz">
-            </div>
-          </div>
+                <div th:insert="fragments::left-menu"></div>
 
-          <div class="help-block" style="height:20px;"></div>
+                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" style="overflow:auto;">
 
-              <div class="card w-75 mx-auto">
-                <div class="card-header">
-                  Ön kayıtlı sporcular
-                </div>
-                <div class="card-body">
-                  <blockquote class="blockquote mb-0">
+                    <div class="help-block" style="height:20px;"></div>
 
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>Sporcu</th>
-                            <th>Kamp adı</th>
-                            <th>Kayıt tarihi</th>
-                            <th>Son görüşme tarihi</th>
-                            <th>Görüşme ekle</th>
-                            <th>Kesin kayıt</th>
-                            <th>Detay</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-
-                          <tr>
-                            <td><button type="button" class="btn btn-link" onclick="">Ahmet Buca</button></td>
-                            <td class="table-text-size" >NBA 1.Devre</td>
-                            <td class="table-text-size" >23/06/2018</td>
-                            <td class="table-text-size" >23/06/2018 18:23</td>
-                            <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#interviewAddModal">ekle</button></td>
-                            <td><button type="button" class="btn btn-link" onclick="">kesin kayıt</button></td>
-                            <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#exampleModal">detay</button></td>
-                          </tr>
-
-                          <tr>
-                            <td><button type="button" class="btn btn-link" onclick="">Ahmet Buca</button></td>
-                            <td class="table-text-size">NBA 1.Devre</td>
-                            <td class="table-text-size">23/06/2018</td>
-                            <td class="table-text-size">23/06/2018 18:23</td>
-                            <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#interviewAddModal">ekle</button></td>
-                            <td><button type="button" class="btn btn-link" onclick="">kesin kayıt</button></td>
-                            <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#exampleModal">detay</button></td>
-                          </tr>
-
-                          <tr>
-                            <td><button type="button" class="btn btn-link" onclick="">Ahmet Buca</button></td>
-                            <td class="table-text-size">NBA 1.Devre</td>
-                            <td class="table-text-size">23/06/2018</td>
-                            <td class="table-text-size">23/06/2018 18:23</td>
-                            <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#interviewAddModal">ekle</button></td>
-                            <td><button type="button" class="btn btn-link" onclick="">kesin kayıt</button></td>
-                            <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#exampleModal">detay</button></td>
-                          </tr>
-
-                        </tbody>
-                      </table>
+                    <div class="card w-75 mx-auto">
+                        <div class="card-body">
+                            <input type="text" class="form-control form-control-lg" id="search" placeholder="Aramak için kelime giriniz">
+                        </div>
                     </div>
 
-                    <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>!-->
-                  </blockquote>
-                </div>
-              </div>
+                    <div class="help-block" style="height:20px;"></div>
+
+                    <div class="card w-75 mx-auto">
+                        <div class="card-header">
+                            Ön kayıtlı sporcular
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sporcu</th>
+                                                <th>Kamp adı</th>
+                                                <th>Son görüşme tarihi</th>
+                                                <th>Görüşme ekle</th>
+                                                <th>Kesin kayıt</th>
+                                                <th>Detay</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <th:block th:each="reg : ${registrations}">
+
+                                            <tr>
+                                                <td><button 
+                                                        type="button" 
+                                                        class="btn btn-link" 
+                                                        th:text="${reg.athlete.name + ' ' + reg.athlete.surname}"
+                                                        th:onclick="'redirect(\' ./registration?id='+ ${reg.athlete.idNumber} +'\');'">Ahmet Buca</button></td>
+                                                <td class="table-text-size" th:text="${reg.camp.name}" >NBA 1.Devre</td>
+                                                <td class="table-text-size" th:text="${reg.preRegistrationDate}" >23/06/2018</td>
+                                                <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#interviewAddModal">ekle</button></td>
+                                                <td><button type="button" class="btn btn-link" onclick="">kesin kayıt</button></td>
+                                                <td><button type="button" class="btn btn-link" onclick="" data-toggle="modal" data-target="#exampleModal">detay</button></td>
+                                            </tr>
+
+                                        </th:block>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>!-->
+                            </blockquote>
+                        </div>
+                    </div>
 
 
 
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Ön kayıt detayı</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                </div>
-              </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ön kayıt detayı</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="interviewAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Görüşme ekle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                                    <button type="button" class="btn btn-primary">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </main>
             </div>
-          </div>
+        </div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="interviewAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Görüşme ekle</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
-                  <button type="button" class="btn btn-primary">Kaydet</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="./js/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="./js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="./js/ie10-viewport-bug-workaround.js"></script>
 
 
+        <script type="text/javascript">
+            function redirect(pageURL) {
+                window.open(pageURL, '_blank');
+            }
+        </script>
 
-        </main>
-      </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="./js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./js/ie10-viewport-bug-workaround.js"></script>
-  
-
-</body></html>
+    </body></html>

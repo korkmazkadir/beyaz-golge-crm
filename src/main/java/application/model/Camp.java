@@ -1,11 +1,15 @@
 package application.model;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +32,13 @@ public class Camp {
 
     @Column(name = "end_date", length = 100)
     private Date endDate;
+
+    @OneToMany(
+            mappedBy = "camp",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Registration> registrations = new LinkedList<>();
 
     protected Camp() {
     }
@@ -86,6 +97,16 @@ public class Camp {
     @Override
     public String toString() {
         return "Camp{" + "id=" + id + ", name=" + name + ", place=" + place + ", startDate=" + startDate + ", endDate=" + endDate + '}';
+    }
+
+    public void addRegistration(Registration registration) {
+        registrations.add(registration);
+        registration.setCamp(this);
+    }
+
+    public void removeRegistration(Registration registration) {
+        registrations.remove(registration);
+        registration.setCamp(null);
     }
 
 }

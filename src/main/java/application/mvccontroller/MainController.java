@@ -4,12 +4,12 @@ import application.model.Camp;
 import application.model.User;
 import application.model.UserRole;
 import application.service.CampService;
+import application.service.RegistrationService;
 import application.service.UserService;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +25,9 @@ public class MainController {
 
     @Autowired
     UserService userService;
+    
+    @Autowired
+    RegistrationService registrationService;
 
     @RequestMapping(value = {"", "/", "/login"}, method = RequestMethod.GET)
     public String loginPage(Principal principal, Model model) {
@@ -69,13 +72,16 @@ public class MainController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registrationPage(Principal principal, Model model) {
+        List<Camp> camps = campService.getAllCamps();
         model.addAttribute("registration_page", true);
+        model.addAttribute("camps", camps);
         return "registration";
     }
 
     @RequestMapping(value = "/pre-registration-list", method = RequestMethod.GET)
     public String preRegistrationPage(Principal principal, Model model) {
         model.addAttribute("pre_registration_page", true);
+        model.addAttribute("registrations",registrationService.getAllPreRegistrations());
         return "pre-registration-list";
     }
 

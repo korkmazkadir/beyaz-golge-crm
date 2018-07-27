@@ -8,4 +8,6 @@ public interface AthleteRepository extends CrudRepository<Athlete, Long> {
 
     public List<Athlete> findAll();
     
+    public Athlete findOneByIdNumber(String tcNumber);
+    
 }
