@@ -91,7 +91,7 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
             $scope.tcNumberElementClass = "success";
             $scope.tcNumberValid = false;
             console.log("---> TC number : " + $scope.idNumber);
-            loadAthleteFromDB($scope.id);
+            loadAthleteFromDB($scope.idNumber);
 
         } else {
 
@@ -161,9 +161,7 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
 
         $http({
             method: 'GET',
-            url: '/athlete',
-            data: {id: tcNumber},
-            headers: {'Content-Type': 'application/json'}
+            url: '/athlete?id=' +  tcNumber
         }).then(function successCallback(data, status, headers, config) {
 
             const athlete = data.data[0];
@@ -212,7 +210,7 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
             console.log("Error data : " + JSON.stringify(data));
         }, function errorCallback(data, status, headers, config) {
 
-            showToastMessage(ToastMessageType.ERROR, "Bir sorun oluştu, sporcu verisi veri tabanından getirilemedi.")
+            showToastMessage(ToastMessageType.ERROR, "Bir sorun oluştu, sporcu verisi veri tabanından getirilemedi.");
 
             console.log("get athlete is unsuccessful : " + JSON.stringify(status));
             console.log("Error data : " + JSON.stringify(data));

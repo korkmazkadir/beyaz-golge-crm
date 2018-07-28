@@ -25,7 +25,7 @@ public class RegistrationController {
     RegistrationRepository registrationRepo;
     
     @RequestMapping(method = RequestMethod.GET)
-    public List<Registration> getAthletes(@RequestParam(value = "id", required = false) Long id) {
+    public List<Registration> getRegistrations(@RequestParam(value = "id", required = false) Long id) {
         if (id != null) {
             Registration registration = registrationRepo.findById(id).get();
             List<Registration> registrations = new LinkedList<>();
