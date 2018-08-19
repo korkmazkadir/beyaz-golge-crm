@@ -3,6 +3,7 @@ package application.mvccontroller;
 import application.model.Camp;
 import application.model.User;
 import application.model.UserRole;
+import application.service.AthleteService;
 import application.service.CampService;
 import application.service.RegistrationService;
 import application.service.UserService;
@@ -28,6 +29,9 @@ public class MainController {
     
     @Autowired
     RegistrationService registrationService;
+    
+    @Autowired
+    AthleteService athleteService;
 
     @RequestMapping(value = {"", "/", "/login"}, method = RequestMethod.GET)
     public String loginPage(Principal principal, Model model) {
@@ -82,7 +86,14 @@ public class MainController {
     public String preRegistrationPage(Principal principal, Model model) {
         model.addAttribute("pre_registration_page", true);
         model.addAttribute("registrations",registrationService.getAllPreRegistrations());
-        return "pre-registration-list";
+        return "pre-registration-list-2";
+    }
+    
+    @RequestMapping(value = "/athlete-list", method = RequestMethod.GET)
+    public String athleteListPage(Principal principal, Model model) {
+        model.addAttribute("athlete_list_page", true);
+        model.addAttribute("athletes",athleteService.getAllAthletes());
+        return "athlete-list";
     }
 
     @RequestMapping(value = "/reports", method = RequestMethod.GET)

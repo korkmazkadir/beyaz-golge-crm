@@ -52,6 +52,10 @@ and open the template in the editor.
                     <a class="nav-link" th:classappend="${pre_registration_page} ? active : x" href="./pre-registration-list">Ön Kayıt Listesi</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${athlete_list_page} ? active : x" href="./athlete-list">Sporcu Listesi</a>
+                </li>
+
 
                 <li class="nav-item" sec:authorize="hasAuthority('ADMIN')" >
                     <a class="nav-link" th:classappend="${report_page} ? active : x" href="./reports">Ödeme Raporları</a>

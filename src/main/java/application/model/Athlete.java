@@ -36,7 +36,7 @@ public class Athlete {
     @Column(name = "gender", length = 10)
     private String gender;
 
-    @Column(name = "bloodType", length = 5)
+    @Column(name = "bloodType", length = 10)
     private String bloodType ;
     
     @Column(name = "mother_name", length = 100)

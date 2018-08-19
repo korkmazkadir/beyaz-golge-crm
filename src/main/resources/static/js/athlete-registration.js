@@ -46,17 +46,33 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
 
     //Pre Registration
     $scope.preRegistrationDate = new Date();
-    $scope.preRegistrationCamp;
+    $scope.preRegistrationCamp = 0;
     $scope.preRegistrationPriceOffer;
     $scope.preRegistrationNote;
 
+    //Registration
+    $scope.recordDate = new Date();
+    $scope.camp = 0;
+    $scope.price;
+    $scope.advancePayment;
+    $scope.numberOfInstallment;
+    $scope.joiningDate;
+    $scope.leavingDate;
+    $scope.transportationType;
+    $scope.transportationNote;
+    $scope.form;
+    $scope.agreement;
+    $scope.healthReport;
 
-    //
+    //Others
     $scope.recordButtonText = "Yeni sporcu kaydet";
     $scope.recordButtonsEnabled = true;
     $scope.tcNumberValid = true;
 
     $scope.tcNumberElementClass = "danger";
+    
+    // 0 : none, 1 : pre registration form, 2 : registration form
+    $scope.showForm = 0;
 
     var isDataLoadedFromDB = false;
 
@@ -166,45 +182,7 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
 
             const athlete = data.data[0];
 
-            if (athlete) {
-                $scope.id = athlete.id;
-                $scope.idNumber = athlete.idNumber;
-                $scope.name = athlete.name;
-                $scope.surname = athlete.surname;
-                $scope.birthDate = athlete.birthDate;
-                $scope.gender = athlete.gender;
-                $scope.bloodType = athlete.bloodType;
-                $scope.city = athlete.city;
-                $scope.school = athlete.school;
-                $scope.club = athlete.club;
-                $scope.agency = athlete.agency;
-                $scope.size = athlete.size;
-                $scope.jerseyNumber = athlete.jerseyNumber;
-                $scope.motherName = athlete.motherNameSurname;
-                $scope.fatherName = athlete.fatherNameSurname;
-                $scope.phoneNumber = athlete.phoneNumber;
-                $scope.email = athlete.email;
-                $scope.motherPhoneNumber = athlete.motherPhoneNumber;
-                $scope.fatherPhoneNumber = athlete.fatherPhoneNumber;
-                ////////////////////////////////////////////////////////////////
-                $scope.protectorRelation = athlete.protectorRelationship;
-                $scope.protectorName = athlete.protectorNameSurname;
-                $scope.protectorHousePhone = athlete.protectorPhoneNumber;
-                $scope.protectorMobilePhone = athlete.protectorMobilePhoneNumber;
-                $scope.protectorEmail = athlete.protectorEmail;
-                /////////////////////////////////////////////////////////////////
-                $scope.emergencyRelation = athlete.emergencyContactRelationship;
-                $scope.emergencyName = athlete.emergencyContactNameSurname;
-                $scope.emergencyHousePhone = athlete.emergencyContactPhoneNumber;
-                $scope.emergencyMobilePhone = athlete.emergencyContactMobilePhoneNumber;
-                $scope.emergencyEmail = athlete.emergencyContactEmail;
-
-
-                $scope.recordButtonText = "Sporcu verisini güncelle";
-                $scope.recordButtonsEnabled = false;
-                isDataLoadedFromDB = true;
-            }
-
+            fillAthleteForm(athlete);
 
             console.log("get athlete is successful : " + JSON.stringify(status));
             console.log("Error data : " + JSON.stringify(data));
@@ -217,7 +195,74 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
         });
 
     }
-    ;
+    
+    function fillAthleteForm(athlete){
+        if (athlete) {
+            $scope.id = athlete.id;
+            $scope.idNumber = athlete.idNumber;
+            $scope.name = athlete.name;
+            $scope.surname = athlete.surname;
+            $scope.birthDate = new Date(Date.parse(athlete.birthDate));
+            $scope.gender = athlete.gender;
+            $scope.bloodType = athlete.bloodType;
+            $scope.city = athlete.city;
+            $scope.school = athlete.school;
+            $scope.club = athlete.club;
+            $scope.agency = athlete.agency;
+            $scope.size = athlete.size;
+            $scope.jerseyNumber = athlete.jerseyNumber;
+            $scope.motherName = athlete.motherNameSurname;
+            $scope.fatherName = athlete.fatherNameSurname;
+            $scope.phoneNumber = athlete.phoneNumber;
+            $scope.email = athlete.email;
+            $scope.motherPhoneNumber = athlete.motherPhoneNumber;
+            $scope.fatherPhoneNumber = athlete.fatherPhoneNumber;
+            ////////////////////////////////////////////////////////////////
+            $scope.protectorRelation = athlete.protectorRelationship;
+            $scope.protectorName = athlete.protectorNameSurname;
+            $scope.protectorHousePhone = athlete.protectorPhoneNumber;
+            $scope.protectorMobilePhone = athlete.protectorMobilePhoneNumber;
+            $scope.protectorEmail = athlete.protectorEmail;
+            /////////////////////////////////////////////////////////////////
+            $scope.emergencyRelation = athlete.emergencyContactRelationship;
+            $scope.emergencyName = athlete.emergencyContactNameSurname;
+            $scope.emergencyHousePhone = athlete.emergencyContactPhoneNumber;
+            $scope.emergencyMobilePhone = athlete.emergencyContactMobilePhoneNumber;
+            $scope.emergencyEmail = athlete.emergencyContactEmail;
+
+
+            $scope.recordButtonText = "Sporcu verisini güncelle";
+            $scope.recordButtonsEnabled = false;
+            isDataLoadedFromDB = true;
+        }
+    }
+    
+    function loadRegistrationFromDB(regId,successCalback){
+        
+        $http({
+            method: 'GET',
+            url: '/registrations?id=' +  regId
+        }).then(function successCallback(data, status, headers, config) {
+
+            const reg = data.data[0];
+
+            if(successCalback){
+                successCalback(reg);
+            }
+
+            console.log("get registration is successful : " + JSON.stringify(status));
+            console.log("Registration data : " + JSON.stringify(data));
+            
+        }, function errorCallback(data, status, headers, config) {
+
+            showToastMessage(ToastMessageType.ERROR, "Bir sorun oluştu, kayıt verisi veri tabanından getirilemedi.");
+
+            console.log("get registration is unsuccessful : " + JSON.stringify(status));
+            console.log("Error data : " + JSON.stringify(data));
+        });
+        
+    }
+    
 
     $scope.motherIsProtector = function () {
         $scope.protectorRelation = "Anne";
@@ -348,10 +393,50 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
         toastr[messageType](message);
     }
 
+    function showRegistrationForm(){
+        $scope.showForm = 2;
+    }
+
+    function preRegToReg(reg){
+        console.log("Pre reg to reg");
+        if (reg) {
+            $scope.preRegistrationDate = new Date(Date.parse(reg.preRegistrationDate));
+            $scope.preRegistrationCamp = reg.camp.id;
+            $scope.preRegistrationPriceOffer = reg.preRegistrationPriceOffer;
+            $scope.preRegistrationNote = reg.preRegistrationNote;
+
+            if(reg.registrationType === "PRE_REGISTRATION" ){
+                $scope.recordDate = new Date();
+                $scope.price = reg.preRegistrationPriceOffer;
+            }else{
+                $scope.recordDate = reg.registrationDate;
+                $scope.price = reg.price;
+            }
+
+            $scope.camp = reg.camp.id;
+            $scope.advancePayment = reg.advancePayment;
+            $scope.numberOfInstallment = reg.numberOfInstallments;
+            $scope.joiningDate = new Date(Date.parse(reg.joiningDate));
+            $scope.leavingDate = new Date(Date.parse(reg.leavingDate));
+            $scope.transportationType = reg.transportaionType;
+            $scope.transportationNote = reg.transportaionType;
+            $scope.form = reg.form;
+            $scope.agreement = reg.agreement;
+            $scope.healthReport = reg.healthReport;
+
+            fillAthleteForm(reg.athlete);
+            showRegistrationForm();
+        }
+    }
+
 
     if ($location.search().id) {
         $scope.idNumber = $location.search().id;
         $scope.idNumberValidate();
+        $location.search({});
+    } if($location.search().pre_reg_id){
+        $scope.preRegistrationId = $location.search().pre_reg_id;
+        loadRegistrationFromDB($scope.preRegistrationId,preRegToReg);
         $location.search({});
     } else {
         console.log("Query Parameter");

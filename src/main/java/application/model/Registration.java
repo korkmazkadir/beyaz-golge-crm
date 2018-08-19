@@ -58,6 +58,41 @@ public class Registration {
     @JsonIgnoreProperties("registration")
     private List<Meeting> meetings = new LinkedList<>();
 
+    ////////////////////////////////////////////////////////////////////////////
+    @Column(name = "registration_date")
+    private Date registrationDate;
+
+    @Column(name = "price")
+    private int price;
+
+    @Column(name = "advance_payment")
+    private int advancePayment;
+
+    @Column(name = "number__of_installments")
+    private int numberOfInstallments;
+
+    @Column(name = "joining_date")
+    private Date joiningDate;
+
+    @Column(name = "leaving_date")
+    private Date leavingDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transportaion_type")
+    private TransportaionType transportaionType;
+
+    @Column(name = "trasnportation_note", length = 300)
+    private String transportationNote;
+
+    @Column(name = "form")
+    private Boolean form = false;
+
+    @Column(name = "agreement")
+    private Boolean agreement = false;
+
+    @Column(name = "health_report")
+    private Boolean healthReport = false;
+
     protected Registration() {
     }
 
@@ -129,6 +164,94 @@ public class Registration {
 
     public List<Meeting> getMeetings() {
         return meetings;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getAdvancePayment() {
+        return advancePayment;
+    }
+
+    public void setAdvancePayment(int advancePayment) {
+        this.advancePayment = advancePayment;
+    }
+
+    public int getNumberOfInstallments() {
+        return numberOfInstallments;
+    }
+
+    public void setNumberOfInstallments(int numberOfInstallments) {
+        this.numberOfInstallments = numberOfInstallments;
+    }
+
+    public Date getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(Date joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+    public Date getLeavingDate() {
+        return leavingDate;
+    }
+
+    public void setLeavingDate(Date leavingDate) {
+        this.leavingDate = leavingDate;
+    }
+
+    public TransportaionType getTransportaionType() {
+        return transportaionType;
+    }
+
+    public void setTransportaionType(TransportaionType transportaionType) {
+        this.transportaionType = transportaionType;
+    }
+
+    public String getTransportationNote() {
+        return transportationNote;
+    }
+
+    public void setTransportationNote(String transportationNote) {
+        this.transportationNote = transportationNote;
+    }
+
+    public Boolean getForm() {
+        return form;
+    }
+
+    public void setForm(Boolean form) {
+        this.form = form;
+    }
+
+    public Boolean getAgreement() {
+        return agreement;
+    }
+
+    public void setAgreement(Boolean agreement) {
+        this.agreement = agreement;
+    }
+
+    public Boolean getHealthReport() {
+        return healthReport;
+    }
+
+    public void setHealthReport(Boolean healthReport) {
+        this.healthReport = healthReport;
     }
 
 }
