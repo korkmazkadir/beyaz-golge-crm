@@ -25,6 +25,7 @@
             background-color: #f0ad4e20;
         }
     
+    
     </style>
 
     
@@ -297,25 +298,24 @@
                             <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-sm" id="instalment-number" placeholder="Taksit sayısı" ng-model="numberOfInstallment">
                             </div>
-                            <div class="col-sm-1"><button type="button" class="btn btn-link">ekle</button></div>
+                            <div class="col-sm-1"><button type="button" class="btn btn-link" ng-click="createInstallment();">ekle</button></div>
                           </div>
 
 
                           <div class="form-group row">
-                            <label for="instalments " class="col-sm-4 col-form-label-sm">Taksitler</label>
-                            <div class="col-sm-8">
-                                
-                                <div class="row">
-                                    <button type="button" class="btn btn-link">
-                                        <span>#1</span> <span>03.06.2018</span> <span>400</span>
-                                    </button>
-                                </div>
-                                <div class="row">
-                                    <button type="button" class="btn btn-link">
-                                        <span>#2</span> <span>03.07.2018</span> <span>400</span>
-                                    </button>
-                                </div>
-                                
+                            <label for="instalments" class="col-sm-4 col-form-label-sm">Taksitler</label>
+                            
+                            <div class="col-sm-8 pre-scrollable" style="max-height:160px">
+                                <div class="row {{installment.type === PaymentType.advanced || installment.type === PaymentType.payedInstallment ? 'text-success' : 'text-danger' }}" ng-repeat="installment in installments" style="font-size:1rem;" >
+                                    <div class="col-xs-11">
+                                        <span> {{installment.type === PaymentType.advanced ? 'Peşinat' : installment.order + ' .Taksit'}} </span>
+                                        <span> [ {{installment.date}} ] - </span>
+                                        <span> {{installment.price}} TL </span>
+                                    </div>
+                                    <div class="col-xs-11">
+                                        <button class="btn btn-link" ng-click="editInstallment($index)">edit</button>
+                                    </div>
+                                 </div>
                             </div>
                           </div>
 
@@ -402,7 +402,9 @@
 
           <div class="help-block" style="height:20px;"></div>
 
-
+          <div th:insert="payment-edit-fragment::payment-edit-fragment"></div>
+          
+          
         </main>
       </div>
     </div>
@@ -425,6 +427,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
 
     <script type="text/javascript" src="./js/toastr.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     
     <script type="text/javascript" src="./js/athlete-registration.js"></script>
     

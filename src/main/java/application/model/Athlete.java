@@ -117,7 +117,7 @@ public class Athlete {
     )
     private List<Registration> registrations = new LinkedList<>();
     
-    protected Athlete() {
+    public Athlete() {
     }
 
     public Athlete(Long id, String idNumber, String name, String surname, Date birthDate, String gender, String bloodType, String motherNameSurname, String fatherNameSurname, String motherPhoneNumber, String fatherPhoneNumber, String phoneNumber, String email, String city, String size, String jerseyNumber, String school, String club, String agency) {

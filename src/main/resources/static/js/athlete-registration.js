@@ -429,6 +429,77 @@ app.controller("athlete-info-controller", function ($scope, $http, $location) {
         }
     }
 
+    ////////////////////////// Installment management
+    $scope.installments = [];
+    $scope.editedInstallment = {};
+    
+    $scope.PaymentType = {
+        advanced : "ADVANCE",
+        installment : "INSTALLMENT"
+    };
+    
+    
+    $scope.createInstallment = function(){
+        const numInstallments = $scope.numberOfInstallment;
+        const advancePayment = $scope.advancePayment;
+        
+        if(numInstallments <= 0){
+            showToastMessage(ToastMessageType.ERROR,"Taksit sayısı 0 dan büyük olmalı.");
+        }else if($scope.preRegistrationPriceOffer <= 0){
+            showToastMessage(ToastMessageType.ERROR,"Fiyat teklifi 0 dan büyük olmalı.");
+        }else if (advancePayment < 0 ){
+            showToastMessage(ToastMessageType.ERROR,"Peşinat 0 dan büyük olmalı.");
+        }else if(advancePayment > $scope.preRegistrationPriceOffer){
+            showToastMessage(ToastMessageType.ERROR,"Peşinat fiyat teklifinden büyük olamaz");
+        }
+        
+        
+        $scope.installments = []; //Clears previous installments
+        var curentDate =  moment().add(1, 'months');
+        
+        if($scope.advancePayment > 0){
+            $scope.installments.push(createPayment(0, moment().format("DD.MM.YYYY"), advancePayment,$scope.PaymentType.advanced));
+        }
+
+        if($scope.advancePayment === $scope.preRegistrationPriceOffer){
+            return;
+        }
+
+        const price = Math.floor((($scope.preRegistrationPriceOffer - $scope.advancePayment) / $scope.numberOfInstallment));
+        var i;
+        for(i = 0; i < numInstallments - 1 ; i++){
+            $scope.installments.push(createPayment(i+1,curentDate.format("DD.MM.YYYY"),price, $scope.PaymentType.installment ));
+            curentDate = curentDate.add(1, 'months');
+        }
+        
+        const lastPrice = price + (($scope.preRegistrationPriceOffer - $scope.advancePayment) - price * numInstallments);
+        $scope.installments.push(createPayment(i+1,curentDate.format("DD.MM.YYYY"),lastPrice, $scope.PaymentType.installment ));
+        
+    };
+    
+    
+    $scope.editInstallment = function($index){
+        $scope.installmentIndex = $index;
+        angular.copy($scope.installments[$index], $scope.editedInstallment);
+    };
+    
+    
+    $scope.saveInstallment = function(){
+        angular.copy($scope.editedInstallment, $scope.installments[$scope.installmentIndex]) ;
+    };
+    
+    
+    function createPayment(order, date, price,type){
+        return{
+            order :order,
+            date : date,
+            amount : price,
+            type : type
+        };
+    }
+    
+    /////////////////////////
+
 
     if ($location.search().id) {
         $scope.idNumber = $location.search().id;
